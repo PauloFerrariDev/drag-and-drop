@@ -2,6 +2,7 @@ import React from "react";
 import initialData from "src/mock/initialData";
 import { ITask, IColumn } from "src/mock/initialData/models";
 import Column from "src/components/Column";
+import { DragDropContext, DropResult } from "react-beautiful-dnd";
 
 function App() {
   const data = initialData;
@@ -34,7 +35,15 @@ function App() {
     return undefined;
   });
 
-  return <div>{renderColumns}</div>;
+  const OnDragEnd = (result: DropResult) => {};
+
+  return (
+    <DragDropContext onDragEnd={OnDragEnd}>
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        {renderColumns}
+      </div>
+    </DragDropContext>
+  );
 }
 
 export default App;
