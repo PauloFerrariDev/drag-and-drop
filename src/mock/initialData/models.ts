@@ -1,16 +1,16 @@
-export interface ITask {
+export interface IAlternative {
   id: string;
   content: string;
 }
 
-export interface IColumn {
+export interface IQuestion {
   id: string;
   title: string;
-  taskIds: string[];
+  alternativeIds: string[];
 }
 
 export interface InitialData {
-  tasks: ITask[];
-  columns: IColumn[];
-  columnOrder: string[];
+  alternatives: IAlternative[];
+  questions: IQuestion[];
+  questionsOrder: string[];
 }
