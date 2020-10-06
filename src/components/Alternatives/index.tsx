@@ -17,7 +17,7 @@ export default function Alternatives(props: AlternativesProps) {
   ): React.CSSProperties => ({
     userSelect: "none",
     padding: 10,
-    margin: "0 0 14px 0",
+    margin: "0 0 12px 0",
     backgroundColor: isDragging ? "lightgreen" : "#fff",
     ...draggableStyle,
   });

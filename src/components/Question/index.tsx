@@ -27,7 +27,7 @@ export default function Question(props: QuestionProps) {
   const getDroppableStyle = (isDraggingOver: boolean): React.CSSProperties => ({
     backgroundColor: isDraggingOver ? "lightblue" : "transparent",
     width: "100%",
-    padding: 16,
+    padding: "16px 24px 12px",
     border: "1px solid lightgrey",
     boxSizing: "border-box",
   });
