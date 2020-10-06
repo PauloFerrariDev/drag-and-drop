@@ -8,3 +8,9 @@ export interface IColumn {
   title: string;
   taskIds: string[];
 }
+
+export interface InitialData {
+  tasks: ITask[];
+  columns: IColumn[];
+  columnOrder: string[];
+}

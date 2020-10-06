@@ -1,20 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import initialData from "src/mock/initialData";
-import { ITask, IColumn } from "src/mock/initialData/models";
+import { ITask, IColumn, InitialData } from "src/mock/initialData/models";
 import Column from "src/components/Column";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 
 function App() {
-  const data = initialData;
+  const [data, setData] = useState<InitialData>(initialData);
 
-  const findColumn = (id: string) => {
+  const findColumn = (id: string): IColumn | undefined => {
     const column: IColumn | undefined = data.columns.find(
       (column) => column.id === id
     );
     return column;
   };
 
-  const findTasks = (taskIds: string[]) => {
+  const findTasks = (taskIds: string[]): ITask[] => {
     let tasks: ITask[] = [];
     taskIds.forEach((taskId) => {
       const task = data.tasks.find((task) => task.id === taskId);
@@ -35,7 +35,47 @@ function App() {
     return undefined;
   });
 
-  const OnDragEnd = (result: DropResult) => {};
+  const reorder = (
+    taskIds: string[],
+    startIndex: number,
+    endIndex: number
+  ): string[] => {
+    const taskIdsTemp = [...taskIds];
+    const [removedTaskId] = taskIdsTemp.splice(startIndex, 1);
+    taskIdsTemp.splice(endIndex, 0, removedTaskId);
+    return taskIdsTemp;
+  };
+
+  const OnDragEnd = (result: DropResult): void => {
+    const { source, destination } = result;
+
+    if (!destination) {
+      return;
+    }
+
+    if (source.droppableId === destination.droppableId) {
+      const column = data.columns.find(
+        (column) => column.id === source.droppableId
+      );
+      if (column) {
+        const taskIds = reorder(
+          column.taskIds,
+          source.index,
+          destination.index
+        );
+
+        const columns = data.columns.map((column) => {
+          if (column.id === source.droppableId) {
+            column.taskIds = taskIds;
+          }
+          return column;
+        });
+
+        setData((prevData) => ({ ...prevData, columns }));
+        console.log("data:", data);
+      }
+    }
+  };
 
   return (
     <DragDropContext onDragEnd={OnDragEnd}>
