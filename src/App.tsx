@@ -14,7 +14,7 @@ import {
   DroppableStateSnapshot,
 } from "react-beautiful-dnd";
 
-function App() {
+export default function App() {
   const [data, setData] = useState<InitialData>(initialData);
 
   const findQuestion = (id: string): IQuestion | undefined => {
@@ -96,9 +96,9 @@ function App() {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    width: "60vw",
+    width: "50vw",
     margin: "auto",
-    padding: "16px 24px",
+    padding: "12px 24px",
     backgroundColor: isDraggingOver ? "lightblue" : "white",
     position: "relative",
   });
@@ -109,7 +109,7 @@ function App() {
         style={{
           width: "100vw",
           padding: "24px 0",
-          backgroundColor: "#eee",
+          backgroundColor: "#ddd",
         }}
       >
         <Droppable
@@ -132,5 +132,3 @@ function App() {
     </DragDropContext>
   );
 }
-
-export default App;

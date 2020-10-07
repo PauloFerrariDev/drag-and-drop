@@ -19,7 +19,7 @@ export default function Question(props: QuestionProps) {
     isDragging: boolean
   ): React.CSSProperties => ({
     userSelect: "none",
-    margin: "8px 0",
+    margin: "12px 0",
     backgroundColor: isDragging ? "lightgreen" : "#f3f3f3",
     ...draggableStyle,
   });
